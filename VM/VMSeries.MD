@@ -1,4 +1,4 @@
-#VM en AZURE
+# VM en AZURE
 
 Azure tiene varios tipos de series de máquinas virtuales:
 
