@@ -1,6 +1,6 @@
 # CheatSheet for Azure
 
-He creado este repositorio a modo de cheatsheet de Azure CLI
+He creado este repositorio a modo de cheatsheet de Azure
 
 ## CLI
 
