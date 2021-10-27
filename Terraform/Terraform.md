@@ -4,7 +4,7 @@ En este subconjunto de carpetas hay varios ejemplos para Terraform
 
 # ResoureGroup
 
-[Creación de un grupo de recursos con terraform](/ResourceGroup/main.tf)
+[Creación de un grupo de recursos con terraform](/Terraform/ResourceGroup/main.tf)
 
 Comandos
 
