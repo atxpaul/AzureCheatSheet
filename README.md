@@ -1,11 +1,14 @@
 # CheatSheet for Azure
 
-I just prepare this for myself to get all the important Azure stuff and have to refer back to when you need it.
+He creado este repositorio a modo de cheatsheet de Azure CLI
 
 ## CLI
 
-You can check all AZ Cli information [here](CLI/CLIBasics.MD)
+Puedes consultar los comandos básicos de Azure CLI [aquí](CLI/CLIBasics.MD)
+Puedes consultar los comandos de Active Directory de Azure CLI [aquí](CLI/CLIActiveDirectory.MD)
+Puedes consultar los comandos de APPServices de Azure CLI [aquí](CLI/CLIAppServices.MD)
+Puedes consultar los comandos de gestión de VM de Azure CLI [aquí](CLI/CLIVM.MD)
 
 ## VM
 
-You can check all VM information [here](VM/VMSeries.MD)
+Puedes ver toda la información sobre máquinas [aquí](VM/VMSeries.MD)
