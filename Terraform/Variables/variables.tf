@@ -6,7 +6,7 @@ variable "application" {
 variable "location" {
   type        = string
   description = "Azure location of network components"
-  default     = "westus2"
+  default     = "westeurope"
 }
 
 variable "vnet_address_space" {
