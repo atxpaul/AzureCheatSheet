@@ -92,6 +92,14 @@ az storage account create --name testblob123 --resource-group StorageRG --locati
 az storage account delete --name testblob123 --resource-group StorageRG
 ```
 
+## Crear contenedor de almacenamiento
+
+Con --public-access blob se da acceso a los blobs. Con --fail-on-exist muestra un error si el contenedor ya existe
+
+```bash
+az storage container create --name packtpubbs --public-access container --account-name packtpubsacliaz storage blob upload --file C:\test.txt --container-name packtpubbs --name blobcli --account-name packtpubsacli
+```
+
 ## Crear una VM
 
 ```bash
