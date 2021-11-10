@@ -126,3 +126,24 @@ az vm open-port -g TestVM-rg -n VMCLI01 --port '80'
 ```bash
 az vm delete --name VMCLI01 --resource-group TestVM-rg
 ```
+
+## Habilitar encriptado de disco
+
+Crear o actualizar keyvault
+
+```bash
+az keyvault create --name "<your-unique-keyvault-name>" --resource-group "myResourceGroup" --location "westeurope" --enabled-for-disk-encryption
+az keyvault update --name "<your-unique-keyvault-name>" --resource-group "MyResourceGroup" --enabled-for-disk-encryption "true"
+```
+
+Habilitar Key Vault para la implementación, si es necesario: permite que el proveedor de recursos Microsoft.Compute recupere los secretos de este almacén de claves cuando se hace referencia al almacén de claves en la creación de recursos, por ejemplo, cuando se crea una máquina virtual.
+
+```bash
+az keyvault update --name "<your-unique-keyvault-name>" --resource-group "MyResourceGroup" --enabled-for-deployment "true"
+```
+
+Habilitar Key Vault para la implementación de plantillas, si es necesario: permite que Resource Manager recupere secretos del almacén.
+
+```bash
+az keyvault update --name "<your-unique-keyvault-name>" --resource-group "MyResourceGroup" --enabled-for-template-deployment "true"
+```
