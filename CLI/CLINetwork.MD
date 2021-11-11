@@ -85,3 +85,25 @@ az network asg create -g MyResourceGroup -n MyAsg --tags MyWebApp
 ```bash
 az network nic update -g MyResourceGroup -n MyNic --network-security-group MyAsg
 ```
+
+## Hacer peering entre 2 VNET
+
+```bash
+az network vnet peering create -g MyResourceGroup -n MyVnet1ToMyVnet2 --vnet-name MyVnet1 \
+    --remote-vnet MyVnet2Id --allow-vnet-access
+```
+
+Si tenemos 3 VNET conectadas tipo A<->B y B<->C, A y C no están conectadas. Necesitaremos una NVA y UDR definidas para que se enrute desde la A la C o viceversa si se necesita.
+Más información [aqui](https://docs.microsoft.com/en-us/azure/virtual-network/tutorial-create-route-table-portal)
+
+## Crear private dns zone
+
+```bash
+az network private-dns zone delete -g MyResourceGroup -n www.mysite.com
+```
+
+## Enlazar private dns zone a vnet
+
+```bash
+az network private-dns link vnet create --name MyLinkName --registration-enabled true --resource-group MyResourceGroup --subscription MySubscription --tags CostCenter=Marketing --virtual-network MyVirtualNetworkId --zone-name www.mysite.com
+```
