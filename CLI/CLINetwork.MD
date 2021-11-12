@@ -35,6 +35,10 @@ az network nic create -g MyResourceGroup --vnet-name MyVnet --subnet MySubnet -n
 az network vnet subnet create -n MySubnet --vnet-name MyVnet -g MyResourceGroup --nat-gateway MyNatGateway --address-prefixes "10.0.0.0/21"
 ```
 
+## Reglas efectivas de un NSG
+
+![Presentación NSG Effective rules](https://github.com/atxpaul/AzureCheatSheet/blob/main/assets/NSGEffectiveRules.png?raw=true)
+
 ## Crear un NSG
 
 ```bash
@@ -107,3 +111,36 @@ az network private-dns zone delete -g MyResourceGroup -n www.mysite.com
 ```bash
 az network private-dns link vnet create --name MyLinkName --registration-enabled true --resource-group MyResourceGroup --subscription MySubscription --tags CostCenter=Marketing --virtual-network MyVirtualNetworkId --zone-name www.mysite.com
 ```
+
+## Load balancer
+
+Los LB tienen 2 tipos de SKUs: Basic (gratis) y Standard. Los Standard permiten balancear a través de diferentes Availability Zones.
+
+Creamos LB
+
+```bash
+az network lb create -g MyResourceGroup -n MyLb --sku Standard --frontend-ip-zone 1 --vnet-name MyVnet --subnet MySubnet
+```
+
+Añadimos backend pools
+
+```bash
+az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --vnet {VnetResourceId} --backend-address name=addr1 ip-address=10.0.0.1 --backend-address name=addr2 ip-address=10.0.0.3
+```
+
+Creamos reglas de balanceo
+
+```bash
+az network lb rule create -g MyResourceGroup --lb-name MyLb -n MyLbRule --protocol Tcp \
+    --frontend-ip-name MyFrontEndIp --frontend-port 80 \
+    --backend-pool-name MyAddressPool --backend-port 80
+```
+
+Además se pueden añadir reglas NAT para enrutar directamente a través de puertos del LB a puertos de máquinas concretas para, por ejemplo, conectarse por SSH o RDP a una máquina concreta
+
+```bash
+az network lb inbound-nat-rule create -g MyResourceGroup --lb-name MyLb -n MyNatRule --protocol Tcp \
+    --frontend-port 5432 --backend-port 3389 --frontend-ip-name MyFrontendIp --floating-ip true
+```
+
+El Load balancer realiza el balanceo a mediante el uso de la capa 4. Si se quiere hacer un balanceo robusto y basado en la capa 7 (con posibilidad de habilitar firewall incluso), se puede utlizar una [Application Gateway](https://docs.microsoft.com/es-es/cli/azure/network/application-gateway?view=azure-cli-latest)
